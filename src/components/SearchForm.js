@@ -1,27 +1,7 @@
-import React, { Component, Children } from "react";
-import { Title } from "./Title";
+import React, { Component,  } from "react";
 
 const API_KEY = "916d4b3f";
 const API_URL = "http://www.omdbapi.com/?";
-
-class ItemMovie extends Component {
-  render() {
-    const { children } = this.props;
-    return (
-      <div>
-        {!!this.props && (
-          <div>              
-            {Object.keys(children).map(chi => (
-              <div key={chi}>
-                {!!children[chi].Year && <div > {children[chi].Title} - {children[chi].Year}</div>}
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    );
-  }
-}
 
 export class SearchFrom extends Component {
   state = {
@@ -39,20 +19,9 @@ export class SearchFrom extends Component {
     fetch(API_URL + "apikey=" + API_KEY + "&s=" + inputMovie)
       .then(res => res.json())
       .then(result => {
-        this.setState({ result });
+        this.props.onResult(result.Search)
       });
   };
-
-  _mapItem () {          
-      if (!!this.state.result.Search) {
-        return this.state.result.Search.map( obj => (
-            <div key={obj.imdbID}>
-                <ItemMovie> { obj } </ItemMovie>
-            </div>
-          ))    
-      }      
-      return null
-  }
 
   render() {
     return (
@@ -69,13 +38,12 @@ export class SearchFrom extends Component {
           <div className="control">
             <button type="submit" className="button is-info">
               Buscar
-            </button>
+            </button>            
           </div>
-        </div>
-        { !this.state.result.Search 
-            ? <p>Sin Resultados </p>
-            : this._mapItem() }        
+        </div>           
+        <br></br>
       </form>
+      
     );
   }
 }

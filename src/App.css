@@ -8,3 +8,22 @@
   display: flex;
   justify-content: center;
 }
+
+.cardDosColumn{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 16px;
+}
+
+.cardDosColumn-item{
+  margin-bottom: 24px;
+  width: 48%;
+}
+
+.card-image{
+  padding-top: 5%;  
+  padding-left: 5%;  
+  width: 90%;
+  
+}
